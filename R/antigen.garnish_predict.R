@@ -1113,6 +1113,14 @@ get_pred_commands <- function(dt) {
       "-a", allele,
       "-f", filename
     )]
+  dtfn[type == "netMHCpan", command :=
+    paste(
+      type,
+      "-p",
+      "-BA",
+      "-a", allele,
+      "-f", filename
+    )]
   dtfn[type == "netMHCIIpan", command :=
     paste(
       type,
