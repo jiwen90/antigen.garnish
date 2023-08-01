@@ -211,7 +211,8 @@ garnish_antigens <- function(dt,
                              affinity_threshold = 34,
                              differential_agretopcity_threshold = 10,
                              dissimilarity_threshold = 0,
-                             foreignness_threshold = 10e-16) {
+                             foreignness_threshold = 10e-16,
+                             presentation_probability_threshold = 0.5) {
   if (class(dt)[1] == "character") {
     dt <- dt %>%
       data.table::fread()
@@ -261,7 +262,8 @@ garnish_antigens <- function(dt,
 
   dt <- dt[, .SD %>% unique(), .SDcols = c(
     "sample_id", "nmer", "MHC", n,
-    "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI"
+    "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", "affinity(nM)_netMHC", "affinity(nM)_netMHCpan",
+    "Score_EL_netMHCpan", "mhcflurry_presentation_score", "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile"
   )]
 
   annotate_antigens <- function(ie,
