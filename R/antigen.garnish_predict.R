@@ -1118,6 +1118,7 @@ get_pred_commands <- function(dt) {
       type,
       "-p",
       "-BA",
+      "-l", nmer_l,
       "-a", allele,
       "-f", filename
     )]
