@@ -791,6 +791,10 @@ merge_predictions <- function(l, dt) {
       data.table::setnames(c("allele", "peptide"), c("MHC", "nmer"))
     dt <- merge(dt, fdt %>% unique(), by = c("nmer", "MHC"), all.x = TRUE)
     dt %<>% unique
+  } else {
+    message("WARNING: No mhcflurry output found. Check your mhcflurry installation.")
+    message("Try running: pip install mhcflurry tensorflow")
+    message("Followed by: mhcflurry-downloads fetch")
   }
 
   message("Calculating netMHC consensus score.")
