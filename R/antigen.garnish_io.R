@@ -260,11 +260,19 @@ garnish_antigens <- function(dt,
 
   if (length(n) < 1) n <- NULL
 
-  dt <- dt[, .SD %>% unique(), .SDcols = c(
-    "sample_id", "nmer", "MHC", n,
+  if ("gene" %chin% names(dt)) {
+    n <- c(n, "gene")
+  }
+
+  n <- c("sample_id", "nmer", "MHC", n,
     "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", "affinity(nM)_netMHC", "affinity(nM)_netMHCpan",
-    "Score_EL_netMHCpan", "mhcflurry_presentation_score", "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile"
-  )]
+    "Score_EL_netMHCpan", "mhcflurry_presentation_score", "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile")
+
+  if ("counts" %chin% names(dt)) {
+    n <- c(n, "counts")
+  }
+
+  dt <- dt[, .SD %>% unique(), .SDcols = n]
 
   annotate_antigens <- function(ie,
                                 md,
