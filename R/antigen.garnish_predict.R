@@ -1496,13 +1496,15 @@ garnish_affinity <- function(dt = NULL,
         stop("Transcript expression matrix does not contain columns for all samples in input data.")
       }
 
-      ct[, counts := counts > min_counts]
+      #ct[, counts := counts > min_counts]
 
-      ct <- ct[counts == TRUE]
+      #ct <- ct[counts == TRUE]
 
-      dt <- merge(dt, ct[, .SD %>% unique(), .SDcols = c("sample_id", "transcript_id")],
+      dt <- merge(dt, ct[, .SD %>% unique(), .SDcols = c("sample_id", "transcript_id", "counts")],
         by = c("sample_id", "transcript_id")
       )
+
+      dt <- dt[dt$counts > min_counts,]
 
       if (nrow(dt) == 0) {
         stop("No variants in any sample met RNA counts matrix threshold, check RNA count matrix input and transcript ids or run without a count matrix.")
