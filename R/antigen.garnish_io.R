@@ -265,7 +265,7 @@ garnish_antigens <- function(dt,
   }
 
   n <- c("sample_id", "nmer", "MHC", n,
-    "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", "affinity(nM)_netMHC", "affinity(nM)_netMHCpan",
+    "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", "affinity(nM)_netMHC", "affinity(nM)_netMHCpan", "mhcflurry_prediction",
     "Score_EL_netMHCpan", "mhcflurry_presentation_score", "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile")
 
   if ("counts" %chin% names(dt)) {
