@@ -601,7 +601,7 @@ make_BLAST_uuid <- function(dti) {
   }) %>% unlist()
 
   lapply(blastdt %>% seq_along(), function(i) {
-    print(paste("Alignment subset", i, "of", length(blastdt)))
+    #print(paste("Alignment subset", i, "of", length(blastdt)))
 
     b <- blastdt[i] %>% data.table::fread()
 
@@ -1154,7 +1154,7 @@ collate_netMHC <- function(esl) {
       fn <- es[[2]]
 
       # read temp file
-      es <- scan(file = fn, what = "character", sep = "\n")
+      es <- scan(file = fn, what = "character", sep = "\n", quiet=T)
 
       # check that files does not contain ERROR
       err <- es %>%
