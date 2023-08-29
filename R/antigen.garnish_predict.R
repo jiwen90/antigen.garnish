@@ -859,6 +859,18 @@ merge_predictions <- function(l, dt) {
     ]
   }
 
+  cols <- dt %>% names() %include% "(%Rank_netMHC)|(%Rank_netMHCpan)|(mhcflurry_prediction_percentile)|(mhcflurry_affinity_percentile)"
+
+  if (length(cols) < 2) {
+    dt[, Ensemble_percentile := get(cols)]
+  }
+
+  if (length(cols) >= 2) {
+    dt[, Ensemble_percentile := mean(as.numeric(.SD), na.rm = TRUE),
+      by = 1:nrow(dt), .SDcols = cols
+    ]
+  }
+
   message("Calculating differential agretopicity.")
 
   dt[, DAI := NA %>% as.numeric()]

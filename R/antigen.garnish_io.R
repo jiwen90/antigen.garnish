@@ -209,6 +209,7 @@ garnish_variants <- function(vcfs, tumor_sample_name = "TUMOR") {
 
 garnish_antigens <- function(dt,
                              affinity_threshold = 34,
+                             affinity_percentile_threshold = 1,
                              differential_agretopcity_threshold = 10,
                              dissimilarity_threshold = 0,
                              foreignness_threshold = 10e-16,
@@ -230,7 +231,9 @@ garnish_antigens <- function(dt,
     return(dt)
   }
 
-  dt <- dt[Ensemble_score < affinity_threshold & pep_type != "wt"]
+  dt <- dt[Ensemble_score < affinity_threshold & 
+            Ensemble_percentile < affinity_percentile_threshold & 
+            pep_type != "wt"]
 
   if (nrow(dt) == 0) {
     ("No qualifying neoantigens present in data.")
@@ -265,8 +268,14 @@ garnish_antigens <- function(dt,
   }
 
   n <- c("sample_id", "nmer", "MHC", n,
-    "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", "affinity(nM)_netMHC", "affinity(nM)_netMHCpan", "mhcflurry_prediction",
-    "Score_EL_netMHCpan", "mhcflurry_presentation_score", "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile")
+    "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", 
+    "affinity(nM)_netMHC", "affinity(nM)_netMHCpan", "mhcflurry_affinity",
+    "Ensemble_percentile",
+    "%Rank_netMHC", "%Rank_netMHCpan", "mhcflurry_affinity_percentile",
+    "Score_EL_netMHCpan", "mhcflurry_presentation_score", 
+    "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile")
+  
+  print(colnames(dt))
 
   if ("counts" %chin% names(dt)) {
     n <- c(n, "counts")
