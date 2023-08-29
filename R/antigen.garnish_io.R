@@ -208,7 +208,7 @@ garnish_variants <- function(vcfs, tumor_sample_name = "TUMOR") {
 #' @md
 
 garnish_antigens <- function(dt,
-                             affinity_threshold = 34,
+                             affinity_threshold = 150, #34,
                              affinity_percentile_threshold = 1,
                              differential_agretopcity_threshold = 10,
                              dissimilarity_threshold = 0,
