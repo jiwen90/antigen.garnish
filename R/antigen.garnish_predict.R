@@ -859,7 +859,7 @@ merge_predictions <- function(l, dt) {
     ]
   }
 
-  cols <- dt %>% names() %include% "(%Rank_netMHC)|(%Rank_netMHCpan)|(mhcflurry_prediction_percentile)|(mhcflurry_affinity_percentile)"
+  cols <- dt %>% names() %include% "(%Rank_netMHC)|(%Rank_BA_netMHCpan)|(mhcflurry_prediction_percentile)|(mhcflurry_affinity_percentile)"
 
   if (length(cols) < 2) {
     dt[, Ensemble_percentile := get(cols)]

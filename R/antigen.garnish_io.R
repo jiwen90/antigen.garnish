@@ -271,7 +271,7 @@ garnish_antigens <- function(dt,
     "Ensemble_score", "dissimilarity", "foreignness_score", "min_DAI", 
     "affinity(nM)_netMHC", "affinity(nM)_netMHCpan", "mhcflurry_affinity",
     "Ensemble_percentile",
-    "%Rank_netMHC", "%Rank_netMHCpan", "mhcflurry_affinity_percentile",
+    "%Rank_netMHC", "%Rank_BA_netMHCpan", "mhcflurry_affinity_percentile",
     "Score_EL_netMHCpan", "mhcflurry_presentation_score", 
     "%Rank_EL_netMHCpan", "mhcflurry_presentation_percentile")
   
