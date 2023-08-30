@@ -76,6 +76,11 @@ get_metadata <- function(dt) {
 
   var_dt <- readRDS(metafile)
 
+  # count number of unique dt$transcript_id not in var_dt$transcript_id
+  n <- unique(dt$transcript_id) %>% setdiff(unique(var_dt$transcript_id))
+  print(paste0(length(n), " transcripts not found in database."))
+  print(n)
+
   dt <- merge(dt, var_dt, by = "transcript_id")
 
   rm(var_dt)
